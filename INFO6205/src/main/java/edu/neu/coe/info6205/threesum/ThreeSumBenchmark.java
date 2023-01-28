@@ -34,17 +34,26 @@ public class ThreeSumBenchmark {
     }
 
     private void benchmarkThreeSum(final String description, final Consumer<int[]> function, int n, final TimeLogger[] timeLoggers) {
-        if (description.equals("ThreeSumQuadratic") && n > 250){
+        if (description.equals("ThreeSumQuadratic") && n >=250){
                 Benchmark_Timer time1 = new Benchmark_Timer(description,function);
                 double timeQ = time1.runFromSupplier(supplier,runs);
                 timeLoggers[0].log(timeQ,n);
                 timeLoggers[1].log(timeQ,n);
-                System.out.println("total time taken "+ timeQ);
+                System.out.println("total time taken "+ timeQ+ " for n "+n);
         }
-        else if(description.equals("ThreeSumCubic") && n > 4000){
+        else if(description.equals("ThreeSumQuadrithmic") && n >=250){
             Benchmark_Timer time2 = new Benchmark_Timer(description,function);
-            double time = time2.runFromSupplier(supplier,runs);
-            System.out.println("total time taken "+ time);
+            double timeL = time2.runFromSupplier(supplier,runs);
+            timeLoggers[0].log(timeL,n);
+            timeLoggers[1].log(timeL,n);
+            System.out.println("total time taken "+ timeL+ " for n "+n);
+        }
+        else if(description.equals("ThreeSumCubic") && n >=250){
+            Benchmark_Timer time3 = new Benchmark_Timer(description,function);
+            double timeC = time3.runFromSupplier(supplier,runs);
+            timeLoggers[0].log(timeC,n);
+            timeLoggers[1].log(timeC,n);
+            System.out.println("total time taken "+ timeC + " for n "+n);
         }
 
         // FIXME

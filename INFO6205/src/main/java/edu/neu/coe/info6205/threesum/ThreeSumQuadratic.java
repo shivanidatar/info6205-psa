@@ -23,12 +23,6 @@ public class ThreeSumQuadratic implements ThreeSum {
 
     public Triple[] getTriples() {
         //System.out.println("hitting the quad function");
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
         List<Triple> triples = new ArrayList<>();
         for (int i = 0; i < length; i++) triples.addAll(getTriples(i));
         Collections.sort(triples);
