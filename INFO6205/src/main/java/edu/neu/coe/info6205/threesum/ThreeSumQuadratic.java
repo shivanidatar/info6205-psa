@@ -1,8 +1,7 @@
 package edu.neu.coe.info6205.threesum;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Implementation of ThreeSum which follows the approach of dividing the solution-space into
@@ -23,6 +22,13 @@ public class ThreeSumQuadratic implements ThreeSum {
     }
 
     public Triple[] getTriples() {
+        //System.out.println("hitting the quad function");
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         List<Triple> triples = new ArrayList<>();
         for (int i = 0; i < length; i++) triples.addAll(getTriples(i));
         Collections.sort(triples);
@@ -38,6 +44,20 @@ public class ThreeSumQuadratic implements ThreeSum {
     public List<Triple> getTriples(int j) {
         List<Triple> triples = new ArrayList<>();
         // FIXME : for each candidate, test if a[i] + a[j] + a[k] = 0.
+        int l = 0;
+        int h = length - 1;
+        while (l < j && h>j) {
+            Triple t = new Triple(a[l], a[j], a[h]);
+            if (a[l]+a[j]+a[h] == 0) {
+                triples.add(t);
+                l++;
+                h--;
+            } else if (a[l]+a[j]+a[h] < 0)
+                l++;
+            else
+                h--;
+        }
+
         // END 
         return triples;
     }

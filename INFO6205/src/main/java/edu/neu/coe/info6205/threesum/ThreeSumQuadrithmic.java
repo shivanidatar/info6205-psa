@@ -39,6 +39,7 @@ class ThreeSumQuadrithmic implements ThreeSum {
         int index = Arrays.binarySearch(a, -a[i] - a[j]);
         if (index >= 0 && index > j) return new Triple(a[i], a[j], a[index]);
         else return null;
+
     }
 
     private final int[] a;

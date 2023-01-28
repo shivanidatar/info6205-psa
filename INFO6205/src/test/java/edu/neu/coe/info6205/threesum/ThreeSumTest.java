@@ -153,4 +153,14 @@ public class ThreeSumTest {
         assertEquals(triplesCubic.length, triplesQuadratic.length);
     }
 
+    @Test
+    public void testGetTriplesQuadrithmic1() {
+        Supplier<int[]> intsSupplier = new Source(1500, 1000).intsSupplier(10);
+        int[] ints = intsSupplier.get();
+        ThreeSum target = new ThreeSumQuadrithmic(ints);
+        Triple[] triplesQuadratic = target.getTriples();
+        Triple[] triplesCubic = new ThreeSumCubic(ints).getTriples();
+        assertEquals(triplesCubic.length, triplesQuadratic.length);
+    }
+
 }
