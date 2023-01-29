@@ -20,6 +20,7 @@ public class ThreeSumBenchmark {
         System.out.println("ThreeSumBenchmark: N=" + n);
         benchmarkThreeSum("ThreeSumQuadratic", (xs) -> new ThreeSumQuadratic(xs).getTriples(), n, timeLoggersQuadratic);
         benchmarkThreeSum("ThreeSumQuadrithmic", (xs) -> new ThreeSumQuadrithmic(xs).getTriples(), n, timeLoggersQuadrithmic);
+        benchmarkThreeSum("ThreeSumQuadraticWithCalipers", (xs) -> new ThreeSumQuadraticWithCalipers(xs).getTriples(), n, timeLoggersQuadratic);
         benchmarkThreeSum("ThreeSumCubic", (xs) -> new ThreeSumCubic(xs).getTriples(), n, timeLoggersCubic);
     }
 
@@ -47,6 +48,13 @@ public class ThreeSumBenchmark {
             timeLoggers[0].log(timeL,n);
             timeLoggers[1].log(timeL,n);
             System.out.println("total time taken "+ timeL+ " for n "+n);
+        }
+        else if(description.equals("ThreeSumQuadraticWithCalipers") && n >=250){
+            Benchmark_Timer time4 = new Benchmark_Timer(description,function);
+            double timeQC = time4.runFromSupplier(supplier,runs);
+            timeLoggers[0].log(timeQC,n);
+            timeLoggers[1].log(timeQC,n);
+            System.out.println("total time taken "+ timeQC+ " for n "+n);
         }
         else if(description.equals("ThreeSumCubic") && n >=250){
             Benchmark_Timer time3 = new Benchmark_Timer(description,function);
