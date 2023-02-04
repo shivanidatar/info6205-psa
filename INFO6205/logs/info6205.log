@@ -1032,3 +1032,5 @@
 2023-01-28 18:58:24 INFO  TimeLogger - Raw time per run (mSec):  3419.62
 2023-01-28 18:58:24 INFO  TimeLogger - Normalized time per run (n^2):  13.36
 2023-01-28 18:58:24 INFO  Benchmark_Timer - Begin run: ThreeSumCubic with 2 runs
+2023-01-29 00:22:19 INFO  TimeLogger - Raw time per run (mSec):  1520246.35
+2023-01-29 00:22:19 INFO  TimeLogger - Normalized time per run (n^3):  .37
