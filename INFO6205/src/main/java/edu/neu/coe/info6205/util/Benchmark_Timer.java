@@ -4,6 +4,10 @@
 
 package edu.neu.coe.info6205.util;
 
+import edu.neu.coe.info6205.sort.elementary.InsertionSort;
+
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -125,4 +129,85 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
     private final Consumer<T> fPost;
 
     final static LazyLogger logger = new LazyLogger(Benchmark_Timer.class);
+    public static void main(String[] args) {
+        Random rand = new Random();
+        InsertionSort insertion_sort = new InsertionSort();
+
+        for (int n = 250; n <= 16000; n = n * 2) {
+
+            /*
+             * Random Array
+             *
+             */
+            System.out.println("N : " + n);
+            ArrayList<Integer> randomList = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                randomList.add(rand.nextInt(n));
+            }
+            // toArray
+            Integer[] randomArray = randomList.toArray(new Integer[0]);
+            // Run benchmark
+            Benchmark<Boolean> benchmarkRandom = new Benchmark_Timer<>(
+                    "randomSort", b -> {
+                insertion_sort.sort(randomArray.clone(), 0, randomArray.length);
+            });
+            double resultRandom = benchmarkRandom.run(true, 10);
+            System.out.println(" Time taken for Insertion sort with random array : " + resultRandom);
+            /*
+             * Ordered Array
+             * Add ordered integers to the arraylist
+             */
+            ArrayList<Integer> orderedList = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                orderedList.add(i + 1);
+            }
+            // toArray
+            Integer[] orderedArray = orderedList.toArray(new Integer[0]);
+            // Run benchmark
+            Benchmark<Boolean> benchmarkArranged = new Benchmark_Timer<>(
+                    "arrangedSort", b -> {
+                insertion_sort.sort(orderedArray.clone(), 0, orderedArray.length);
+            });
+            double resultOrdered = benchmarkArranged.run(true, 10);
+            System.out.println("Time taken for Insertion sort with ordered array : " + resultOrdered);
+            /*
+             * Reversed Array
+             * Add reversed integers to the arraylist
+             */
+            ArrayList<Integer> reverseList = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                reverseList.add(n - i);
+            }
+            // toArray
+            Integer[] reverseArray = reverseList.toArray(new Integer[0]);
+            // Run benchmark
+            Benchmark<Boolean> benchmarkReversed = new Benchmark_Timer<>(
+                    "reverseSort", b -> {
+                insertion_sort.sort(reverseArray.clone(), 0, reverseArray.length);
+            });
+            double resultReversed = benchmarkReversed.run(true, 10);
+            System.out.println("Time taken for Insertion sort with reversed array : " + resultReversed);
+            /*
+             * Partial Array
+             * Add partial integers to the arraylist
+             */
+            ArrayList<Integer> partialList = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                if (i > n / 2) {
+                    partialList.add(rand.nextInt(n));
+                } else {
+                    partialList.add(i);
+                }
+            }
+            // toArray
+            Integer[] partialArray = partialList.toArray(new Integer[0]);
+            // Run benchmark
+            Benchmark<Boolean> benchmarkPartial = new Benchmark_Timer<>(
+                    "partialSort", b -> {
+                insertion_sort.sort(partialArray.clone(), 0, partialArray.length);
+            });
+            double resultPartial = benchmarkPartial.run(true, 10);
+            System.out.println("Time taken for Insertion sort with partially ordered array : " + resultPartial);
+        }
+    }
 }

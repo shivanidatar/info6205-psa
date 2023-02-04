@@ -5,8 +5,15 @@ package edu.neu.coe.info6205.sort.elementary;
 
 import edu.neu.coe.info6205.sort.BaseHelper;
 import edu.neu.coe.info6205.sort.Helper;
+import edu.neu.coe.info6205.sort.HelperFactory;
 import edu.neu.coe.info6205.sort.SortWithHelper;
+import edu.neu.coe.info6205.threesum.ThreeSumBenchmark;
 import edu.neu.coe.info6205.util.Config;
+import edu.neu.coe.info6205.util.StatPack;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class InsertionSort.
@@ -62,7 +69,14 @@ public class InsertionSort<X extends Comparable<X>> extends SortWithHelper<X> {
      */
     public void sort(X[] xs, int from, int to) {
         final Helper<X> helper = getHelper();
+        for(int i=from+1; i<to; i++) {
+            for (int j = i; j > from; j--) {
+                if (helper.less(xs[j], xs[j - 1])) {
+                    helper.swap(xs, j - 1, j);
+                } else break;
 
+            }
+        }
         // FIXME
         // END 
     }
@@ -72,4 +86,5 @@ public class InsertionSort<X extends Comparable<X>> extends SortWithHelper<X> {
     public static <T extends Comparable<T>> void sort(T[] ts) {
         new InsertionSort<T>().mutatingSort(ts);
     }
+
 }
