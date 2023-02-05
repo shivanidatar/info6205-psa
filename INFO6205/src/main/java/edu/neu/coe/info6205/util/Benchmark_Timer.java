@@ -135,10 +135,7 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
 
         for (int n = 250; n <= 16000; n = n * 2) {
 
-            /*
-             * Random Array
-             *
-             */
+            // Random Array
             System.out.println("N : " + n);
             ArrayList<Integer> randomList = new ArrayList<>();
             for (int i = 0; i < n; i++) {
@@ -148,7 +145,7 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
             Integer[] randomArray = randomList.toArray(new Integer[0]);
             // Run benchmark
             Benchmark<Boolean> benchmarkRandom = new Benchmark_Timer<>(
-                    "randomSort", b -> {
+                    "randomArraySort", b -> {
                 insertion_sort.sort(randomArray.clone(), 0, randomArray.length);
             });
             double resultRandom = benchmarkRandom.run(true, 10);
@@ -165,7 +162,7 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
             Integer[] orderedArray = orderedList.toArray(new Integer[0]);
             // Run benchmark
             Benchmark<Boolean> benchmarkArranged = new Benchmark_Timer<>(
-                    "arrangedSort", b -> {
+                    "orderedArraySort", b -> {
                 insertion_sort.sort(orderedArray.clone(), 0, orderedArray.length);
             });
             double resultOrdered = benchmarkArranged.run(true, 10);
@@ -182,7 +179,7 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
             Integer[] reverseArray = reverseList.toArray(new Integer[0]);
             // Run benchmark
             Benchmark<Boolean> benchmarkReversed = new Benchmark_Timer<>(
-                    "reverseSort", b -> {
+                    "reverseArraySort", b -> {
                 insertion_sort.sort(reverseArray.clone(), 0, reverseArray.length);
             });
             double resultReversed = benchmarkReversed.run(true, 10);
@@ -203,7 +200,7 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
             Integer[] partialArray = partialList.toArray(new Integer[0]);
             // Run benchmark
             Benchmark<Boolean> benchmarkPartial = new Benchmark_Timer<>(
-                    "partialSort", b -> {
+                    "partialOrderedArraySort", b -> {
                 insertion_sort.sort(partialArray.clone(), 0, partialArray.length);
             });
             double resultPartial = benchmarkPartial.run(true, 10);
