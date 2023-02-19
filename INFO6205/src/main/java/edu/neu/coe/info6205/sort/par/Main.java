@@ -15,15 +15,18 @@ import java.util.concurrent.ForkJoinPool;
  * CONSIDER tidy it up a bit.
  */
 public class Main {
-
+    public static int threadCount = 64;
+    public static ForkJoinPool newPool = new ForkJoinPool(threadCount);
     public static void main(String[] args) {
         processArgs(args);
-        System.out.println("Degree of parallelism: " + ForkJoinPool.getCommonPoolParallelism());
+        //System.out.println("Degree of parallelism: " + ForkJoinPool.getCommonPoolParallelism());
+        System.out.println("Degree of parallelism: " + newPool.getParallelism());
         Random random = new Random();
         int[] array = new int[2000000];
+        //int[] array = new int[000000];
         ArrayList<Long> timeList = new ArrayList<>();
-        for (int j = 50; j < 100; j++) {
-            ParSort.cutoff = 10000 * (j + 1);
+        for (int j = 0; j < 100; j++) {
+            ParSort.cutoff = 20000 * (j + 1);
             // for (int i = 0; i < array.length; i++) array[i] = random.nextInt(10000000);
             long time;
             long startTime = System.currentTimeMillis();
@@ -36,8 +39,8 @@ public class Main {
             timeList.add(time);
 
 
-            System.out.println("cutoff：" + (ParSort.cutoff) + "\t\t10times Time:" + time + "ms");
-
+            //System.out.println("cutoff：" + (ParSort.cutoff) + "\t\t10times Time:" + time + "ms");
+            System.out.println(time);
         }
         try {
             FileOutputStream fis = new FileOutputStream("./src/result.csv");
