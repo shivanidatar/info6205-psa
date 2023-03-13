@@ -72,6 +72,7 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
             if (helper.instrumented()) {
                 helper.incrementHits(2); // XXX these account for v1 and v2.
                 while (i <= gt) {
+                    //System.out.println("I is "+i+" and gt is "+gt);
                     if (helper.compare(xs, i, v1) < 0) helper.swap(xs, lt++, i++);
                     else if (helper.compare(xs, i, v2) > 0) helper.swap(xs, i, gt--);
                     else i++;
